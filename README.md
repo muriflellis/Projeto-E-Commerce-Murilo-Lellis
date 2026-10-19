@@ -36,4 +36,5 @@ Ele gerou o arquivo "gerar_dados.py" que criou o Excel "dados_ecommerce" que foi
 Após isso, criei a pasta "notebook" com o objetivo de preservar o notebook de analises, ja que fazer apartir de um .py me obrigaria a gerar o código varias e varias vezes.
 
 3° Etapa - Analise Exploratória e Tratamento de Dados (ETL)
-
+Fiz um tratamento com o "fillna" retirando os valores nulos das colunas "produto_categoria" e "cliente_cidade" para mostrarem, respectivamente, "não informado" e "desconhecido". Após isso, eliminei as linhas vazia da coluna "preco" com o "dropna".
+Obtive a certeza, através do "isna().sum()" de quem haveria mais nenhum valor nulo na planilha. 
