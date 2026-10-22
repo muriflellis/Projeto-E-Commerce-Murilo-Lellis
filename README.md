@@ -55,3 +55,5 @@ Respondi as duas primeiras perguntas através de um único código. A tabela "df
 A partir das informações extraídas, conseguimos notar que a categoria "Beleza e Saúde" lidera o faturamento total com R$ 7.890,66 devido ao seu ticket médio alto de R$ 151,74, contrariando as estatísticas de quem possui o maior volume de pedidos. 
 
 Para responder a terceira pergunta, apliquei as mesmas condições das outras perguntas apenas com o diferencial de agrupar os dados pela "cliente_cidade" e fazer as agregações de soma do faturamento total por cidade e o número de pedidos em cada uma delas. Os números nos revelaram que a cidade de "São Paulo" é o principal polo comercial da operação, acumulando R$ 12.795,33 em receita com 79 pedidos. Seguidos de "Rio de Janeiro" e "Desconhecidos", que foi a alteração que fizemos para padronizar a tabela e conseguir gerar esses insights.
+
+5° Etapa - 
