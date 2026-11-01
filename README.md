@@ -36,24 +36,40 @@ Solicitei ao OpenIa, um script de criação para criar uma tabela ficticia com o
 Ele gerou o arquivo "gerar_dados.py" que criou o Excel "dados_ecommerce" que foi colado dento da pasta "data" para melhor localização. 
 Após isso, criei a pasta "notebook" com o objetivo de preservar o notebook de analises, ja que fazer apartir de um .py me obrigaria a gerar o código varias e varias vezes.
 
-3° Etapa - Tratamento de Dados Nulos
-Fiz um tratamento com o "fillna" retirando os valores nulos das colunas "produto_categoria" e "cliente_cidade" para mostrarem, respectivamente, "não informado" e "desconhecido". Após isso, eliminei as linhas vazia da 
-coluna "preco" com o "dropna".
+3° Etapa - Auditoria, tratamento e validação dos dados
 
-Obtive a certeza, através do "isna().sum()" de quem haveria mais nenhum valor nulo na planilha. 
+Com a tabela criada, comecei a trabalhar com Python e Pandas para entender melhor os dados e identificar possíveis problemas.
 
-4° Etapa - Analise Analítica e Insights de Negócio.
-Comecei definindo quais perguntas responderíamos para poder iniciar a análise. Separamos três perguntas estratégicas de negócio para direcionar o projeto: 
-1 - Volume vs Faturamento - Qual categoria vende mais em quantidade e qual traz a maior receita?
-2 - Ticket Médio - Qual o valor médio gasto por produto em cada categoria? 
-3 - Análise Geográfica da Receita - Quais cidades geram maior faturamento? 
+Primeiro, fiz uma verificação geral da tabela para entender a quantidade de registros, os tipos de dados, os valores ausentes e possíveis duplicidades.
 
-Para conseguir respondê-las com maior facilidade, já inseri diretamente em outra variável para representá-las e facilitar a consulta. 
+Durante essa análise, encontrei:
 
-Respondi as duas primeiras perguntas através de um único código. A tabela "df_vendas" foi separada em categorias de produtos com o "groupby", aplicamos agregações na coluna "preco" para extrairmos o valor total de pedidos, o quanto cada produto arrecadou e o ticket médio de cada produto. Para concluir, organizamos a planilha em ordem decrescente baseada no valor total de cada produto. 
+12 valores ausentes em produto_categoria;
 
-A partir das informações extraídas, conseguimos notar que a categoria "Beleza e Saúde" lidera o faturamento total com R$ 7.890,66 devido ao seu ticket médio alto de R$ 151,74, contrariando as estatísticas de quem possui o maior volume de pedidos. 
+10 valores ausentes em preco;
 
-Para responder a terceira pergunta, apliquei as mesmas condições das outras perguntas apenas com o diferencial de agrupar os dados pela "cliente_cidade" e fazer as agregações de soma do faturamento total por cidade e o número de pedidos em cada uma delas. Os números nos revelaram que a cidade de "São Paulo" é o principal polo comercial da operação, acumulando R$ 12.795,33 em receita com 79 pedidos. Seguidos de "Rio de Janeiro" e "Desconhecidos", que foi a alteração que fizemos para padronizar a tabela e conseguir gerar esses insights.
+28 valores ausentes em cliente_cidade.
 
-5° Etapa - 
+Depois de identificar esses problemas, comecei o tratamento dos dados:
+
+Converti a coluna data_compra de texto para o formato de data (datetime).
+
+Substituí os valores ausentes de produto_categoria e cliente_cidade por "Não Informado".
+
+Mantive os 10 preços ausentes sem preenchimento, pois entendi que utilizar uma média ou mediana poderia alterar os resultados das análises financeiras.
+
+Por último, realizei algumas verificações para garantir que os dados estavam consistentes, conferindo pedidos duplicados, linhas repetidas, preços, fretes e avaliações fora do intervalo permitido.
+
+O resultado foi:
+
+250 registros preservados;
+
+Nenhum pedido ou registro duplicado;
+
+Nenhum preço ou frete com valor igual ou inferior a zero;
+
+Nenhuma avaliação fora do intervalo de 1 a 5;
+
+Apenas os 10 preços que já estavam ausentes continuaram sem informação.
+
+Com isso, finalizei a preparação da base e deixei os dados prontos para começar a análise das vendas.
