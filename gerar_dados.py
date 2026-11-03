@@ -9,12 +9,26 @@ os.makedirs('data', exist_ok=True)
 np.random.seed(42)
 n_linhas = 250
 
+segundos_ano = 365 * 24 * 60 * 60
+
+datas_compra = (
+    pd.Timestamp('2025-01-01') +
+    pd.to_timedelta(
+        np.random.randint(0, segundos_ano, size=n_linhas),
+        unit='s'
+    )
+).to_list()
+
+datas_compra[0] = pd.Timestamp('2025-01-01')
+datas_compra[1] = pd.Timestamp('2025-12-31 23:59:59')
+
+
 categorias = ['utilidades_domesticas', 'informatica_acessorios', 'beleza_saude', 'esporte_lazer', 'moveis_decoracao']
 cidades = ['sao paulo', 'rio de janeiro', 'belo horizonte', 'curitiba', 'porto alegre', 'salvador', None]
 
 dados_reais = {
     'id_pedido': [f'req_{np.random.randint(100000, 999999)}' for _ in range(n_linhas)],
-    'data_compra': pd.date_range(start='2025-01-01', periods=n_linhas, freq='h').strftime('%Y-%m-%d %H:%M:%S'),
+    'data_compra': pd.to_datetime(datas_compra).strftime('%Y-%m-%d %H:%M:%S'),
     'produto_categoria': np.random.choice(categorias, n_linhas, p=[0.3, 0.2, 0.2, 0.15, 0.15]),
     'preco': np.round(np.random.exponential(scale=120, size=n_linhas) + 15, 2),
     'frete': np.round(np.random.uniform(10, 45, size=n_linhas), 2),
